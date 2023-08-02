@@ -24,7 +24,7 @@ public class MobileSliderPage
 		@FindBy (xpath = "//select[@id='cat_id']")private WebElement categorySelectDropDown;
 		@FindBy (xpath = "//input[@id='main_img']") private WebElement chooseFileButton;
 		@FindBy (xpath = "//button[@type='submit']") private WebElement saveButton;
-		@FindBy (xpath = "//i[@class='icon fas fa-check']") private WebElement alertMessage;
+		@FindBy (xpath = "//div[contains(@class,'alert-dismissible')]") private WebElement alertMessage;
 				
 		public MobileSliderPage clickOnNewButton()
 		{
@@ -55,8 +55,7 @@ public class MobileSliderPage
 			waitUtility.waitForElementClickable(driver, saveButton);
 			saveButton.click();
 			return this;
-		}
-		
+		}		
 		public boolean isSuccessAlertMessageDisplayed()
 		{
 			return alertMessage.isDisplayed();

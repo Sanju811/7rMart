@@ -10,7 +10,7 @@ public class ExtentReportUtility
 	public synchronized static ExtentReports createExtentReports() 
 	{
 		ExtentSparkReporter reporter = new ExtentSparkReporter("./extent-reports/extent-report.html");
-		reporter.config().setReportName("ServiceApp Project");
+		reporter.config().setReportName("7rMart Project");
 		extentReports.attachReporter(reporter);
 		extentReports.setSystemInfo("Organization", "Obsqura");
 		extentReports.setSystemInfo("Name", "Sanju K");

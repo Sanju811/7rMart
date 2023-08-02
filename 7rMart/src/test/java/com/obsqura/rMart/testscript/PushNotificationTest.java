@@ -23,5 +23,4 @@ public class PushNotificationTest extends Base
 		pushNotificationPage.enterTitle().enterDescripiton().clickOnSaveButton();
 		assertTrue(pushNotificationPage.isAlertDisplayed(), "User not able to send notification");
 	}
-
 }

@@ -14,8 +14,7 @@ public class MenuSelectionTest extends Base
 		String userName = ExcelUtility.getString(1, 0,"LoginPage");
 		String password = ExcelUtility.getString(1, 0,"LoginPage");
 		LoginPage loginPage = new LoginPage(driver);
-		loginPage.enterUsernameOnUsernameField(userName).enterPasswrodOnPasswrodField(password).clickOnSignInButton();
-		
+		loginPage.enterUsernameOnUsernameField(userName).enterPasswrodOnPasswrodField(password).clickOnSignInButton();	
 		MenuSelectionPage menuSelectionPage = new MenuSelectionPage(driver);
 		menuSelectionPage.clickOnDashBoard().clickOnManageOrders().clickOnManageExpense().clickOnManageProduct().clickOnVerifyUsers()
 		.clickOnManageUsers().clickOnPushNotification().clickOnManageContent().clickOnManageSlider().clickOnMobileSlider()
