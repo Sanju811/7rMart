@@ -20,9 +20,9 @@ public class ManageLocationTest extends Base
 		MenuSelectionPage menuSelectionPage = new MenuSelectionPage(driver);
 		menuSelectionPage.clickOnManageLocation();		
 		ManageLocationPage manageLocationPage = new ManageLocationPage(driver);
-		manageLocationPage.clickOnNewButton().selectContryFromDropDown().selectStateFromDropDown().enterLocation()
-		.enterDeliveryCharge().clickOnSaveButton();
-		assertTrue(manageLocationPage.isSuccessAlertDisplayed(), "User is not able to add location by filling all mandatory field");
+		manageLocationPage.clickOnNewButton().selectCountryFromDropDown().selectStateFromDropDown().enterLocation()
+		.enterDeliveryCharge().clickOnSaveButton().clickOnCancelButton().clickOnSearchOption().selectCountryFromDropDown().selectStateFromDropDown().clickOnSearchButton();
+		assertTrue(manageLocationPage.isLocationAddedInList(), "User is not able to add location by filling all mandatory field");
 			
 	}
 

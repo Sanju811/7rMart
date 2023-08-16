@@ -12,7 +12,7 @@ import utilities.ExcelUtility;
 public class ManageExpenseTest extends Base
 {
 	@Test(retryAnalyzer = Retry.class,description="Verify user is  able to add expense record by filling all field")
-	public void verifyUserIsAbleToAddExpenseRecordByFillingAllfield()
+	public void verifyUserIsAbleToAddExpenseRecordByFillingAllfield() throws InterruptedException
 	{
 		String userName = ExcelUtility.getString(1, 0,"LoginPage");
 		String password = ExcelUtility.getString(1, 0,"LoginPage");
@@ -23,8 +23,7 @@ public class ManageExpenseTest extends Base
 		ManageExpensePage manageExpensePage = new ManageExpensePage(driver);
 		manageExpensePage.clickOnNewButton().selectUser().selectCategory().selectOrderId().selectPurchaseId()
 		   .selectExpenseType().enterAmount().enterRemarks().uploadFile().clickOnSaveButton();
-		boolean isAlertMessageDisplayed = manageExpensePage.alertMessageIsDisplayed();
-		assertTrue(isAlertMessageDisplayed, "User not  able to add expense record by filling all field");
+		assertTrue(manageExpensePage.isExpenseDetailsAdded(), "User not  able to add expense record by filling all field");
 	}
 
 }

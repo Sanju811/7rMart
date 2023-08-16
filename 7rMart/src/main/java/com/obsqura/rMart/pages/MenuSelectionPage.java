@@ -42,18 +42,6 @@ public class MenuSelectionPage
 	@FindBy(xpath = "//i[contains(@class,'sidebar-item-icon')]") private WebElement settings;
 	
 	
-	public void toGetAllTheSubMenus(String category)
-	{
-		for(WebElement menu:menuList)
-		{
-
-			String getMenuText = menu.getText();
-			if(getMenuText.equals(category))
-			{
-				menu.click();
-			}
-		}
-	}
 	public MenuSelectionPage clickOnDashBoard()
 	{
 		dashBoard.click();

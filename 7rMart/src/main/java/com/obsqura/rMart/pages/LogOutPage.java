@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utilities.PageUtility;
 
 public class LogOutPage 
 {
@@ -30,7 +31,8 @@ public class LogOutPage
 	}
 	public String checkForLoginMessage()
 	{
-		String messageDisplayed = loginMessage.getText();
+		PageUtility pageUtility = new PageUtility();
+		String messageDisplayed= pageUtility.getText(loginMessage);
 		return messageDisplayed;
 	}
 	

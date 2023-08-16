@@ -24,7 +24,6 @@ public class ManageDeliveryBoyTest extends Base
 			menuSelectionPage.clickOnManageDeliveryBoy();			
 			ManageDeliveryBoyPage manageDeliveryBoyPage = new ManageDeliveryBoyPage(driver);
 			manageDeliveryBoyPage.clickOnNewButton().enterName().enterEmail().enterPhoneNumber().enterAddressField().enterUserName().enterPassword().clickOnSaveButton();
-			boolean isAlertMessageDisplayed = manageDeliveryBoyPage.isAlertMessageDisplayed();
-			assertTrue(isAlertMessageDisplayed, "User is not able to add ManageDeliveryBoy details by filling all field");
+			assertTrue(manageDeliveryBoyPage.isNewDeliveryBoyAdded(), "User is not able to add ManageDeliveryBoy details by filling all field");
 		}
 	}

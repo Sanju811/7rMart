@@ -10,8 +10,8 @@ import utilities.ExcelUtility;
 
 public class ManageSliderTest extends Base
 {
-	@Test(retryAnalyzer = Retry.class,description="Verify whether user able to submit the Manage slider page after filling all the field values")
-	public void verifyWhetherTheUserAbleToSubmitTheManageSliderPagAfterFillingAllTheFieldValues()
+	@Test(retryAnalyzer = Retry.class,description="Verify user able to add manage slider details by filling all fields")
+	public void verifyWhetherTheUserAbleToAddManageSliderDetailsByFillingAllFields()
 	{
 		String userName = ExcelUtility.getString(1, 0,"LoginPage");
 		String password = ExcelUtility.getString(1, 0,"LoginPage");
@@ -19,9 +19,8 @@ public class ManageSliderTest extends Base
 		loginPage.enterUsernameOnUsernameField(userName).enterPasswrodOnPasswrodField(password).clickOnSignInButton();
 		MenuSelectionPage menuSelectionPage = new MenuSelectionPage(driver);
 		menuSelectionPage.clickOnManageSlider();
-		ManageSliderPage manageSilderPage = new ManageSliderPage(driver).newButtonClick().uploadFile().enterValueInLinkField()
-		      .clickOnSaveButton();
-		boolean isAlertMessageDisplayed = manageSilderPage.isSuccessalertDisplayed();
-		assertTrue(isAlertMessageDisplayed, "Unable to submit the Manage Silder page");	
+		ManageSliderPage manageSilderPage = new ManageSliderPage(driver);
+		manageSilderPage.clickOnNewButton().uploadFile().enterValueInLinkField().clickOnSaveButton().clickOnCancelButton();
+		assertTrue(manageSilderPage.isSliderDetailsAddedInList(), "User not able to add manage slider details by filling all fields");	
 	}
 }

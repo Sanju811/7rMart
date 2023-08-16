@@ -1,15 +1,14 @@
 package com.obsqura.rMart.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import utilities.ExcelUtility;
-import utilities.FileUploadUtility;
-import utilities.GeneralUtility;
 import utilities.PageUtility;
-import utilities.WaitUtility;
 
 public class AdminUsersPage 
 {
@@ -25,7 +24,7 @@ public WebDriver driver;
 	@FindBy(xpath = "//input[@id='password']")private WebElement passwordField;
 	@FindBy(xpath = "//select[@id='user_type']")private WebElement userTypeDropDown;
 	@FindBy(xpath = "//button[@name='Create']")private WebElement saveButton;
-	@FindBy(xpath = "//div[contains(@class,'alert-dismissible')]")private WebElement successAlert;
+	@FindAll(@FindBy(xpath = "//table[contains(@class,'table-sm')]//td")) private List<WebElement> tableData;
 	
 	public AdminUsersPage clickOnNewButton()
 	{
@@ -52,11 +51,11 @@ public WebDriver driver;
 	{
 		saveButton.click();
 		return this;
-	}		
-	public boolean isSuccessAlertDisplayed()
-	{
-		return successAlert.isDisplayed();
 	}
-
-
+	public boolean isNewUserAdded()
+	{
+		PageUtility pageUtility = new PageUtility();
+		boolean isUserAddedInList = pageUtility.isListContainsText(tableData, ExcelUtility.getString(1, 0,"AdminUsers"));
+		return isUserAddedInList;
+	}
 }

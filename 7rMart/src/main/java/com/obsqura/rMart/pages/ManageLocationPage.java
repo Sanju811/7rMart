@@ -1,7 +1,10 @@
 package com.obsqura.rMart.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.ExcelUtility;
@@ -22,14 +25,17 @@ public WebDriver driver;
 	@FindBy(xpath = "//input[@id='location']") private WebElement enterLocationField;
 	@FindBy(xpath = "//input[@id='delivery']") private WebElement enterdeliveryChargeField;
 	@FindBy(xpath = "//button[@type='submit']") private WebElement saveButton;
-	@FindBy(xpath = "//div[contains(@class,'alert-success')]") private WebElement alertMessage;
+	@FindBy(xpath = "//a[contains(@class,'btn-primary') and @onclick='click_button(2)']") private WebElement searchOption;
+	@FindBy(xpath = "//button[@value='sr']") private WebElement searchButton;
+	@FindBy(xpath = "//a[text()='Cancel']") private WebElement cancelButton;
+	@FindAll(@FindBy(xpath = "//table[contains(@class,'table-bordered')]//td")) private List<WebElement> tableData;
 
 	public ManageLocationPage clickOnNewButton()
 	{
 		newButton.click();
 		return this;
 	}
-	public ManageLocationPage selectContryFromDropDown()
+	public ManageLocationPage selectCountryFromDropDown()
 	{
 		PageUtility pageUtility = new PageUtility();
 		pageUtility.selectDropdownbyText(countrySelectField, ExcelUtility.getString(0, 0,"ManageLocation"));
@@ -56,9 +62,28 @@ public WebDriver driver;
 		saveButton.click();
 		return this;
 	}
-	public boolean isSuccessAlertDisplayed()
+	public ManageLocationPage clickOnSearchOption()
 	{
-		return alertMessage.isDisplayed();
+		searchOption.click();
+		return this;
 	}
-
+	public ManageLocationPage clickOnSearchButton()
+	{
+		searchButton.click();
+		return this;
+	}
+	public ManageLocationPage clickOnCancelButton()
+	{
+		PageUtility pageUtility = new PageUtility();
+		pageUtility.scrollToElement(driver, cancelButton);
+		cancelButton.click();
+		return this;
+	}
+	public boolean isLocationAddedInList()
+	{
+		PageUtility pageUtility = new PageUtility();
+		pageUtility.scrollBy(driver);
+		boolean isLocationAdded = pageUtility.isListContainsText(tableData, ExcelUtility.getString(1, 0, "ManageLocation"));
+		return isLocationAdded;
+	}
 }

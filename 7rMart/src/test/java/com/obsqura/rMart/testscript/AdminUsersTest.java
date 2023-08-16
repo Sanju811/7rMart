@@ -21,7 +21,7 @@ public class AdminUsersTest extends Base
 		menuSelectionPage.clickOnAdminUsers();	
 		AdminUsersPage adminUsersPage = new AdminUsersPage(driver);
 		adminUsersPage.clickOnNewButton().enterUserName().enterPassword().selectValueFromUserTypeDropDown().clickOnSaveButton();
-		assertTrue(adminUsersPage.isSuccessAlertDisplayed(),"User is not able to add AdminUser information by filling all mandatoryField");
+		assertTrue(adminUsersPage.isNewUserAdded(),"User is not able to add AdminUser information by filling all mandatoryField");
 	}
 
 }

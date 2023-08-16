@@ -1,7 +1,11 @@
 package com.obsqura.rMart.pages;
 
+import java.util.List;
+
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.ExcelUtility;
@@ -26,7 +30,7 @@ public class ManageDeliveryBoyPage
 	@FindBy(xpath = "//input[@id='username']") private WebElement userNameField;
 	@FindBy(xpath = "//input[@id='password']") private WebElement passwordField;
 	@FindBy(xpath = "//button[@name='create']") private WebElement saveButton;
-	@FindBy(xpath = "//div[contains(@class,'alert-dismissible')]") private WebElement alertMessage;
+	@FindAll(@FindBy(xpath = "//table[contains(@class,'table-bordered')]//td")) private List<WebElement> tableData;
 	
 	public ManageDeliveryBoyPage clickOnNewButton()
 	{
@@ -65,14 +69,16 @@ public class ManageDeliveryBoyPage
 	}
 	public ManageDeliveryBoyPage clickOnSaveButton()
 	{
+		PageUtility pageUtility = new PageUtility();
+		pageUtility.scrollToElement(driver, saveButton);
 		saveButton.click();
 		return this;
 	}
-	public boolean isAlertMessageDisplayed()
+	public boolean isNewDeliveryBoyAdded()
 	{
-		WaitUtility waitUtility = new WaitUtility();
-		waitUtility.waitForElement(driver, alertMessage);
-		return alertMessage.isDisplayed();
+		PageUtility pageUtility = new PageUtility();
+		boolean isDeliveryBoyAddedInList = pageUtility.isListContainsText(tableData, ExcelUtility.getString(0, 1,"ManageDeliveryBoy"));
+		return isDeliveryBoyAddedInList;
 	}
 
 }

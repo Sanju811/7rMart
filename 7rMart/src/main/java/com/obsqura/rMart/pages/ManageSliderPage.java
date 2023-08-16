@@ -1,13 +1,17 @@
 package com.obsqura.rMart.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import utilities.ExcelUtility;
 import utilities.FileUploadUtility;
 import utilities.GeneralUtility;
+import utilities.PageUtility;
 import utilities.WaitUtility;
 
 public class ManageSliderPage
@@ -24,10 +28,10 @@ public WebDriver driver;
 	@FindBy(xpath = "//input[@id='main_img']") private WebElement fileUploadButton;
 	@FindBy(xpath = "//input[@id='link']") private WebElement linkField;
 	@FindBy(xpath = "//button[@name='create']") private WebElement saveButton;
-	@FindBy(xpath = "//div[contains(@class,'alert-dismissible')]") private WebElement alertMessage;
+	@FindAll(@FindBy(xpath = "//table[contains(@class,'table-bordered')]//td")) private List<WebElement> tableData;
+	@FindBy(xpath = "//a[text()='Cancel']") private WebElement cancelButton;
 	
-	
-	public ManageSliderPage newButtonClick()
+	public ManageSliderPage clickOnNewButton()
 	{
 		newButton.click();
 		return this;
@@ -50,9 +54,17 @@ public WebDriver driver;
 		saveButton.click();
 		return this;
 	}
-	public boolean isSuccessalertDisplayed() 
+	public ManageSliderPage clickOnCancelButton()
 	{
-		return alertMessage.isDisplayed();
+		cancelButton.click();
+		return this;
 	}
+	public boolean isSliderDetailsAddedInList()
+	{
+		PageUtility pageUtility = new PageUtility();
+		boolean isSliderAdded = pageUtility.isListContainsText(tableData, ExcelUtility.getString(0, 0, "ManageSlider"));
+		return isSliderAdded;
+	}
+
 
 }

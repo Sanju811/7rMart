@@ -40,6 +40,7 @@ public class LoginPage
 	
 	public boolean isHomePageDisplayed()
 	{
+		
 		return homePage.isDisplayed();
 	}
 	
